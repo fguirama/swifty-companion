@@ -10,16 +10,27 @@ if (!cliendId || !cliendSecret) {
 }
 
 export default function postToken() {
-    return apiClient<iAuthToken>("/oauth/token", undefined, undefined, {method: "POST", body: JSON.stringify({client_id: cliendId, cliend_secret: cliendSecret, grant_type: "client_credentials"})});
+    const options = {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded",},
+        // @ts-ignore // todo check
+        body: new URLSearchParams({
+            grant_type: "client_credentials",
+            client_id: cliendId,
+            client_secret: cliendSecret,
+        }).toString(),
+    }
+    return apiClient<iAuthToken>("/oauth/token", undefined, undefined, options);
 }
 
 function getUser(token?: iAuthToken, makeRequest?: () => Promise<void>, userLogin?: string) {
-    return apiClient<iUser>(`/v2/users?filter[login]=${userLogin}`, token, makeRequest);
+    return apiClient<iUser[]>(`/v2/users?filter[login]=${userLogin}`, token, makeRequest);
 }
 
 export function useUser(userLogin: string) {
     return useApiQuery(
         ["user", userLogin],
         (token?: iAuthToken, makeRequest?: () => Promise<void>) => getUser(token, makeRequest, userLogin),
+        userLogin.length === 8
     );
 }

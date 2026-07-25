@@ -32,8 +32,9 @@ export default async function apiClient<T>(endpoint: string, token?: iAuthToken,
         `${API_URL}${endpoint}`,
         {
             ...options,
+
             headers: {
-                "Content-Type": "application/json",
+                ...(options?.headers ?? {}),
                 ...(token && {
                     Authorization: `Bearer ${token.access_token}`,
                 }),
@@ -43,6 +44,7 @@ export default async function apiClient<T>(endpoint: string, token?: iAuthToken,
         }
     );
 
+    console.log("OPTION REQUEST", endpoint, options);
     const data = await response.json().catch(() => null);
     if (!response.ok) {
         console.log("ERREUR DANS LA REQUETE", data);
