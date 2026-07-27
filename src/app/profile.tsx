@@ -83,6 +83,7 @@ export default function ProfileScreen({route}: {route: Route}) {
 
         <Section name="Skills" errorMsg={errorMsgSkills} items={cursus !== undefined && skills !== undefined ? skills[cursus].skills : undefined} />
         <Section name="Projects" errorMsg={errorMsgProjects} items={projects}/>
+        <View className="h-12"/>
     </ScrollView>)
 }
 
@@ -125,7 +126,7 @@ function Section({name, items, errorMsg}: {name: "Projects" | "Skills", items?: 
         }
         {
             viewSec && items && items.length > 5 &&
-            <Pressable className="" onPress={() => setExpend(!expend)}>
+            <Pressable onPress={() => setExpend(!expend)}>
                 <Text className="text-xs text-center text-gray-900 font-semibold">{expend ? "Less" : "More"}</Text>
             </Pressable>
         }
