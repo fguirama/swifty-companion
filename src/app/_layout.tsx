@@ -6,6 +6,7 @@ import Profile from "@/app/profile";
 import Index from "@/app/index";
 import React, {useState} from "react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,11 +24,13 @@ export default function Layout() {
     );
 
     return (<QueryClientProvider client={queryClient}>
-        <AuthProvider>
-            <Stack.Navigator screenOptions={{headerShown:false}}>
-                <Stack.Screen name="Search" component={Index}/>
-                <Stack.Screen name="Profile" component={Profile}/>
-            </Stack.Navigator>
-        </AuthProvider>
+        <ActionSheetProvider>
+            <AuthProvider>
+                <Stack.Navigator>
+                    <Stack.Screen name="Search" component={Index}/>
+                    <Stack.Screen name="Profile" component={Profile}/>
+                </Stack.Navigator>
+            </AuthProvider>
+        </ActionSheetProvider>
     </QueryClientProvider>);
 }

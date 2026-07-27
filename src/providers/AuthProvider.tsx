@@ -1,36 +1,28 @@
 import {createContext, useContext, useEffect, useState, ReactNode,} from "react";
 import {iAuthToken} from "@/types/type.42";
-import postToken from "@/lib/api.42";
+import postToken from "@/lib/api.42.auth";
 
 type AuthContextType = {
     token?: iAuthToken;
-    makeRequest?: () => Promise<void>;
+    makeRequest?: () => Promise<iAuthToken | undefined>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({children}: {children: ReactNode}) {
     const [token, setToken] = useState<iAuthToken>();
-    let refreshPromise = false;
 
     useEffect(() => {
         makeRequest().then(() => {});
     }, []);
 
     const makeRequest = async ()=> {
-        if (refreshPromise)
-            return ;
-
-        refreshPromise = true;
-        await postToken()
+        return await postToken()
             .then((data) => {
                 if (data)
                     setToken(data);
-            })
-            .finally(() => {
-                refreshPromise = false;
+                return data;
             });
-            // todo handle error
     };
 
     return (<AuthContext.Provider value={{token, makeRequest}}>
