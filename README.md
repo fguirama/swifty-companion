@@ -1,56 +1,76 @@
-# Welcome to your Expo app 👋
+# Swifty Companion
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Swifty Companion is an Expo / React Native app that lets you search 42 students, view their profile, and inspect their skills and projects through the 42 API.
 
-## Get started
+![App demo](./.img/video.gif)
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+- Search for a 42 login
+- Display user profile details
+- Switch between cursus views
+- Browse skills and projects
+- Automatic 42 API authentication
 
-2. Start the app
+## Tech stack
 
-   ```bash
-   npx expo start
-   ```
+- Expo
+- React Native
+- Expo Router
+- TypeScript
+- TanStack Query
+- NativeWind
 
-In the output, you'll find options to open the app in a
+## Requirements
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Node.js
+- npm
+- Expo Go, Android emulator, iOS simulator, or an Expo development build
+- 42 API credentials
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Environment variables
 
-## Get a fresh project
-
-When you're ready, run:
+Create a `.env` file at the project root and add:
 
 ```bash
-npm run reset-project
+EXPO_PUBLIC_CLIENT_ID=your_client_id
+EXPO_PUBLIC_CLIENT_SECRET=your_client_secret
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+These values are required to request an access token from the 42 API.
 
-### Other setup steps
+## Installation
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```bash
+npm install
+```
 
-## Learn more
+## Running the app
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm run start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Then open the app with one of the Expo options shown in the terminal.
 
-## Join the community
+## Available scripts
 
-Join our community of developers creating universal apps.
+| Script | Description |
+| --- | --- |
+| `npm run start` | Start the Expo development server |
+| `npm run android` | Run the app on Android |
+| `npm run ios` | Run the app on iOS |
+| `npm run web` | Run the app in the browser |
+| `npm run lint` | Check the code with Expo lint |
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Project structure
+
+```text
+src/
+  app/         Screens and navigation
+  component/   Reusable UI components
+  hook/        Shared hooks
+  lib/         API clients and data fetching
+  providers/   React context providers
+  types/       Shared TypeScript types
+```
