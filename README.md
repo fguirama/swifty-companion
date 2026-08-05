@@ -2,7 +2,7 @@
 
 Swifty Companion is an Expo / React Native app that lets you search 42 students, view their profile, and inspect their skills and projects through the 42 API.
 
-![App demo](./.img/video.gif)
+![App demo](./.git-medias/video.gif)
 
 ## Features
 
